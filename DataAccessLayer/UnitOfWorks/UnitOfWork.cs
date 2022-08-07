@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Abstract;
+﻿using CoreLayer.Results;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 
 namespace DataAccessLayer.UnitOfWorks
@@ -32,18 +33,16 @@ namespace DataAccessLayer.UnitOfWorks
 
         public ITemporaryBasketsRepo RepoTemporaryBaskets => temporaryBaskets ?? new TemporaryBasketsRepo(context);
 
-        public async Task<string> SaveChange()
+        public async Task<IResult> SaveChange()
         {
             await context.Database.BeginTransactionAsync();
             try
             {
-                return await context.SaveChangesAsync().ContinueWith(s => context.Database.CommitTransactionAsync()).ContinueWith(s => "İşlem Başarılı");
+                return Result.FactoryResult(CoreLayer.Results.ComplexTypes.StatusCode.Success, await context.SaveChangesAsync().ContinueWith(s => context.Database.CommitTransactionAsync()).ContinueWith(s => "İşlem Başarılı"));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return await context.Database.RollbackTransactionAsync().ContinueWith(s => "İşlem Başarısız");
-
+                return Result.FactoryResult(CoreLayer.Results.ComplexTypes.StatusCode.Error, await context.Database.RollbackTransactionAsync().ContinueWith(s => "İşlem Başarısız"), ex);
             }
         }
     }

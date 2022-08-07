@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Abstract;
+﻿using CoreLayer.Results;
+using DataAccessLayer.Abstract;
 
 namespace DataAccessLayer.UnitOfWorks
 {
@@ -11,6 +12,6 @@ namespace DataAccessLayer.UnitOfWorks
         public IOrdersRepo RepoOrders { get; }
         public IProductsRepo RepoIProducts { get; }
         public ITemporaryBasketsRepo RepoTemporaryBaskets { get; }
-        public Task<string> SaveChange();
+        public Task<IResult> SaveChange();
     }
 }
