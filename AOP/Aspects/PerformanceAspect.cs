@@ -6,18 +6,20 @@ namespace AOP.Aspects
 {
     public class PerformanceAspect : MethodInterception
     {
-        private Stopwatch stopwatch;
+        private Stopwatch _Stopwatch;
         public PerformanceAspect()
         {
-            stopwatch = new Stopwatch();
+            _Stopwatch = new Stopwatch();
         }
         protected override void OnBefore(IInvocation invocation)
         {
-            stopwatch.Start();
+            _Stopwatch.Start();
         }
         protected override void OnAfter(IInvocation invocation)
         {
-            Console.WriteLine($"Performans: {invocation.Method.DeclaringType.FullName} - {invocation.Method.Name} Süre : {stopwatch.Elapsed.TotalSeconds.ToString()}");
+            Console.WriteLine("Performans : " + invocation.Method.DeclaringType.FullName + " - " + invocation.Method.Name + " Süre : " + _Stopwatch.Elapsed.TotalSeconds.ToString());
+
+            _Stopwatch.Stop();
         }
     }
 }

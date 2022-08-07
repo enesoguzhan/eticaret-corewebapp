@@ -3,10 +3,10 @@
 namespace AOP.Utilities.Interceptors
 {
     //IInvocation => Tetiklenen metot hakkındaki tüm bilgileri içerisinde barındırıp kullanmamıza olanak sağlayan bir interface yapısıdır.
-    public abstract class MethodInterception : MethodIncterceptorBaseAttribute
+    public abstract class MethodInterception : MethodInterceptorBaseAttirbute
     {
         /// <summary>
-        /// Belirtilen metot tetilendiğinde,Metot çalışmadan önce devreye giren yapımızdır.
+        /// Belirtilen Metot Tetiklendiğinde, Metot Çalışmadan Önce Devreye Giren Yapımızdır.
         /// </summary>
         /// <param name="invocation"></param>
         protected virtual void OnBefore(IInvocation invocation)
@@ -14,7 +14,7 @@ namespace AOP.Utilities.Interceptors
 
         }
         /// <summary>
-        /// Belirtilen metot tetilendiğinde,Metot çalışması bittikten sonra devreye giren yapımızdır.
+        /// Belirtilen Metot Tetiklendiğinde, Metot Çalışması bittikten sonra Giren Yapımızdır.
         /// </summary>
         /// <param name="invocation"></param>
         protected virtual void OnAfter(IInvocation invocation)
@@ -22,15 +22,15 @@ namespace AOP.Utilities.Interceptors
 
         }
         /// <summary>
-        /// Belirtilen metot çalışırken , Hata alındığında devreye giren yapımızdır.
+        /// Belirtilen Metot çalışırken, Hata Alındığında Devreye Giren Yapımızdır.
         /// </summary>
         /// <param name="invocation"></param>
-        protected virtual void OnException(IInvocation invocation, Exception ex)
+        protected virtual void OnException(IInvocation invocation, Exception e)
         {
 
         }
         /// <summary>
-        /// Belirtilen metot çalışırken , Sorunsuz bir şekilde işlem tamamlandıysa devreye giren yapımızdır.
+        /// Belirtilen Metot çalışırken, Sorunsuz bir şekilde işlem tamamlandıysa devreye giren yapımızdır.
         /// </summary>
         /// <param name="invocation"></param>
         protected virtual void OnSuccess(IInvocation invocation)
@@ -38,23 +38,23 @@ namespace AOP.Utilities.Interceptors
 
         }
 
-        // Çok biçimlilik : Üst sınıftaki metotu alıp , alt sınıfta yapacağı işlemi değiştirerek kullanma olayı
-        // Bu metot içerisinde hangi işlemlerde hangi metotların çalışacağını belirtiriz.
+        // Çok Biçmlilik : Üst SınıfTaki Metot'u alıp, Alt Sınıfta Yapacağı işlemi değiştirerek kullanma olayıdır.
+        // Bu Metot içerisinde Hangi İşlemlerde Hangi Metot'ların çalışacağını Belirtiriz.
         public override void Intercept(IInvocation invocation)
         {
-            OnBefore(invocation); // İlk çalışıcak metot
+            OnBefore(invocation); // İlk Bu Metot'un çalışacağı belirtiliyor.
             try
             {
-                invocation.Proceed(); // tetiklenen metot içerisinde ilerlemeye başla
+                invocation.Proceed(); // Tetiklenen Metot içerisinde ilerlemeye Başla.
                 if (invocation.ReturnValue is Task returnValueTask)
                 {
                     returnValueTask.GetAwaiter().GetResult();
                 }
-                OnSuccess(invocation);//İşlem sorunsuz şekilde devam ettiyse bu metot çalışıcak
+                OnSuccess(invocation);// İşlem Sorunsuz Şekilde Devam Ettiyse Bu Metot Çalışacak.
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                OnException(invocation, ex);
+                OnException(invocation, e);
             }
             finally
             {

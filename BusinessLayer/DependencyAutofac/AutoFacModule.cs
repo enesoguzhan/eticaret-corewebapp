@@ -1,7 +1,9 @@
 ﻿using AOP.Utilities.Interceptors;
 using Autofac;
 using Autofac.Extras.DynamicProxy;
+using BusinessLayer.Concrete;
 using Castle.DynamicProxy;
+using DataAccessLayer;
 
 namespace BusinessLayer.DependencyAutofac
 {
@@ -12,12 +14,19 @@ namespace BusinessLayer.DependencyAutofac
 
         protected override void Load(ContainerBuilder builder)
         {
-           
-            var assembly = System.Reflection.Assembly.GetCallingAssembly();
+            builder.RegisterType<EticaretContext>();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
+            builder.RegisterType<CategoriesService>().As<ICategoriesService>();
+            builder.RegisterType<CustomersService>().As<ICustomersService>();
+            builder.RegisterType<OrdersRelationService>().As<IOrdersRelationService>();
+            builder.RegisterType<ProductsService>().As<IProdutctsService>();
+
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
                 .EnableInterfaceInterceptors(new ProxyGenerationOptions()
                 {
-                    Selector = new AspectInterceptorSelect()
+                    Selector = new AspectInterceptorSelector()
                 }).SingleInstance();
         }
     }

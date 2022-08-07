@@ -10,7 +10,7 @@ namespace DataAccessLayer.UnitOfWorks
         public IOrderAddressRepo RepoOrderAddress { get; }
         public IOrderDetailsRepo RepoOrderDetails { get; }
         public IOrdersRepo RepoOrders { get; }
-        public IProductsRepo RepoIProducts { get; }
+        public IProductsRepo RepoProducts { get; }
         public ITemporaryBasketsRepo RepoTemporaryBaskets { get; }
         public Task<IResult> SaveChange();
     }

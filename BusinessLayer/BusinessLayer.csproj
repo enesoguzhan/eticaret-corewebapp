@@ -14,12 +14,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AOP\AOP.csproj" />
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
     <ProjectReference Include="..\EntitiesLayer\EntityLayer.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Abstract\" />
-    <Folder Include="Concrete\" />
   </ItemGroup>
 
 </Project>
