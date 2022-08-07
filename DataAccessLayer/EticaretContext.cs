@@ -17,7 +17,7 @@ namespace DataAccessLayer
         // Veritabanı Bağlantısı Gerçekleştiren Metot.
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-58;Database=EticaretDb;Trusted_Connection=True;");
         }
 
         // Veritabanında işlem yapılacağı zaman Mapping Olayını Gerçekleştiren Metot.

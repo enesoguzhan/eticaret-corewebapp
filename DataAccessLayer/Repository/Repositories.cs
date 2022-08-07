@@ -51,6 +51,13 @@ namespace DataAccessLayer.Repository
                 query = context.Set<TEntity>();
             }
 
+            if (include.Any())
+            {
+                foreach (var item in include)
+                {
+                    query = query.Include(item);
+                }
+            }
             return await query.ToListAsync();
         }
 

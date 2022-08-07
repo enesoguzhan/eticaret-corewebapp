@@ -7,8 +7,8 @@ namespace AOP.Aspects
     {
         protected override void OnSuccess(IInvocation invocation)
         {
-            Console.WriteLine($"{invocation.Method.Name} Method Çalıştı");
-            Console.WriteLine($"{invocation.Method.Name} Method Çalıştı");
+            Console.WriteLine(invocation.Method.Name + " Başarılı Bir Şekilde Çalıştı");
+            Console.WriteLine("Geriye Döndürülen : " + invocation.ReturnValue);
         }
     }
 }

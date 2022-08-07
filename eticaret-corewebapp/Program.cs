@@ -6,7 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 //AutoFactý burada kullanacaðýmýzý bildiriyoruz
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
-builder.Host.ConfigureContainer<ContainerBuilder>(s => s.RegisterModule(new AutoFacModule()));
+builder.Host.ConfigureContainer<ContainerBuilder>(x => x.RegisterModule(new AutoFacModule()));
+
 var app = builder.Build();
 
 app.UseRouting();

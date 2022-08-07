@@ -6,8 +6,8 @@ namespace DataAccessLayer.UnitOfWorks
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DbContext context;
-        public UnitOfWork(DbContext context)
+        private readonly EticaretContext context;
+        public UnitOfWork(EticaretContext context)
         {
             this.context = context;
         }
@@ -29,7 +29,7 @@ namespace DataAccessLayer.UnitOfWorks
 
         public IOrdersRepo RepoOrders => orders ?? new OrdersRepo(context);
 
-        public IProductsRepo RepoIProducts => products ?? new ProductsRepo(context);
+        public IProductsRepo RepoProducts => products ?? new ProductsRepo(context);
 
         public ITemporaryBasketsRepo RepoTemporaryBaskets => temporaryBaskets ?? new TemporaryBasketsRepo(context);
 

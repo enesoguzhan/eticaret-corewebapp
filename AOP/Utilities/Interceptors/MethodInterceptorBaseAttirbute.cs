@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace AOP.Utilities.Interceptors
 {
-    public abstract class MethodIncterceptorBaseAttribute : Attribute, IInterceptor
+    public abstract class MethodInterceptorBaseAttirbute : Attribute, IInterceptor
     {
         // Bu Metot sayesinde bütün işlemler sırasıyla gerçekleşiyor.
         public virtual void Intercept(IInvocation invocation)
         {
-            throw new NotImplementedException();
+           
         }
     }
 }
